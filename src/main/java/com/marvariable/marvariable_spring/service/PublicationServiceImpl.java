@@ -1,5 +1,6 @@
 package com.marvariable.marvariable_spring.service;
 
+import com.marvariable.marvariable_spring.dto.response.PublicationResponseDTO;
 import com.marvariable.marvariable_spring.entity.Publication;
 import com.marvariable.marvariable_spring.repository.PublicationRepository;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,21 @@ public class PublicationServiceImpl implements PublicationService {
         return publicationRepository.findByCategoryIgnoreCase(category);
     }
 
-   @Override
-public Publication save(Publication publication) {
-    Objects.requireNonNull(publication, "La publication no puede ser null");
-    return publicationRepository.save(publication);
-}
+    @Override
+    public Publication save(Publication publication) {
+        Objects.requireNonNull(publication, "La publication no puede ser null");
+        return publicationRepository.save(publication);
+    }
+
+    @Override
+    public List<PublicationResponseDTO> getRecentPublications() {
+        return publicationRepository.findAll()
+                .stream()
+                .map(publication -> new PublicationResponseDTO(
+                        publication.getId(),
+                        publication.getTitle(),
+                        publication.getPublicationDate(),
+                        publication.getImageUrl()))
+                .toList();
+    }
 }
