@@ -1,6 +1,7 @@
 package com.marvariable.marvariable_spring.controller;
 
 import com.marvariable.marvariable_spring.dto.response.PublicationResponseDTO;
+import com.marvariable.marvariable_spring.dto.response.VisualArtResponseDTO;
 import com.marvariable.marvariable_spring.entity.Publication;
 import com.marvariable.marvariable_spring.service.PublicationService;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,12 @@ public class PublicationController {
     @GetMapping("/recent")
     public List<PublicationResponseDTO> getRecentPublications() {
         return publicationService.getRecentPublications();
+
+    }
+
+    @GetMapping("/visual-arts")
+    public List<VisualArtResponseDTO> getVisualArts() {
+        return publicationService.getVisualArts();
     }
 
     @PostMapping

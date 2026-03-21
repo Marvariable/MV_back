@@ -1,6 +1,7 @@
 package com.marvariable.marvariable_spring.service;
 
 import com.marvariable.marvariable_spring.dto.response.PublicationResponseDTO;
+import com.marvariable.marvariable_spring.dto.response.VisualArtResponseDTO;
 import com.marvariable.marvariable_spring.entity.Publication;
 import com.marvariable.marvariable_spring.repository.PublicationRepository;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,18 @@ public class PublicationServiceImpl implements PublicationService {
                         publication.getTitle(),
                         publication.getPublicationDate(),
                         publication.getImageUrl()))
+                .toList();
+    }
+
+    @Override
+    public List<VisualArtResponseDTO> getVisualArts() {
+        return publicationRepository.findByCategoryIgnoreCase("Artes visuales")
+                .stream()
+                .map(publication -> new VisualArtResponseDTO(
+                        publication.getId(),
+                        publication.getImageUrl(),
+                        publication.getPublicationDate(),
+                        publication.getCategory()))
                 .toList();
     }
 }

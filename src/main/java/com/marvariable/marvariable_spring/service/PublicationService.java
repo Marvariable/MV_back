@@ -1,6 +1,7 @@
 package com.marvariable.marvariable_spring.service;
 
 import com.marvariable.marvariable_spring.dto.response.PublicationResponseDTO;
+import com.marvariable.marvariable_spring.dto.response.VisualArtResponseDTO;
 import com.marvariable.marvariable_spring.entity.Publication;
 import java.util.List;
 
@@ -11,6 +12,9 @@ public interface PublicationService {
     List<Publication> getPublicationsByCategory(String category);
 
     Publication save(Publication publication);
-    
-     List<PublicationResponseDTO> getRecentPublications();
+
+    List<PublicationResponseDTO> getRecentPublications();
+
+    List<VisualArtResponseDTO> getVisualArts();
+
 }
