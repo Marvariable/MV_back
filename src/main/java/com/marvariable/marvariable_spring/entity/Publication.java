@@ -22,6 +22,10 @@ public class Publication {
 
     private String category;
 
+    private String status;
+
+    private String link;
+
     public Publication() {
     }
 
@@ -49,6 +53,14 @@ public class Publication {
         return category;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public String getlink() {
+        return link;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -71,5 +83,13 @@ public class Publication {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

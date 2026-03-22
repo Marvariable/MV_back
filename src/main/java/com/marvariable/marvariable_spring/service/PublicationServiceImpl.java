@@ -4,10 +4,15 @@ import com.marvariable.marvariable_spring.dto.response.PublicationResponseDTO;
 import com.marvariable.marvariable_spring.dto.response.VisualArtResponseDTO;
 import com.marvariable.marvariable_spring.entity.Publication;
 import com.marvariable.marvariable_spring.repository.PublicationRepository;
+
+import io.micrometer.common.lang.NonNull;
+
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class PublicationServiceImpl implements PublicationService {
@@ -32,6 +37,53 @@ public class PublicationServiceImpl implements PublicationService {
     public Publication save(Publication publication) {
         Objects.requireNonNull(publication, "La publication no puede ser null");
         return publicationRepository.save(publication);
+    }
+
+    @Override
+    @NonNull
+    public Optional<Publication> getPublicationById(Long id) {
+        return publicationRepository.findById(id);
+    }
+
+    @Override
+    public Publication updatePublication(Long id, Publication publication) {
+        Publication existingPublication = publicationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Publication not found with id: " + id));
+
+        existingPublication.setTitle(publication.getTitle());
+        existingPublication.setDescription(publication.getDescription());
+        existingPublication.setPublicationDate(publication.getPublicationDate());
+        existingPublication.setImageUrl(publication.getImageUrl());
+        existingPublication.setCategory(publication.getCategory());
+        existingPublication.setLink(publication.getlink());
+        existingPublication.setStatus(publication.getStatus());
+
+        return publicationRepository.save(existingPublication);
+    }
+
+    @Override
+    public void deletePublication(Long id) {
+        publicationRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Publication> searchPublications(String title, LocalDate publicationDate) {
+        boolean hasTitle = title != null && !title.isBlank();
+        boolean hasDate = publicationDate != null;
+
+        if (hasTitle && hasDate) {
+            return publicationRepository.findByTitleContainingIgnoreCaseAndPublicationDate(title, publicationDate);
+        }
+
+        if (hasTitle) {
+            return publicationRepository.findByTitleContainingIgnoreCase(title);
+        }
+
+        if (hasDate) {
+            return publicationRepository.findByPublicationDate(publicationDate);
+        }
+
+        return publicationRepository.findAll();
     }
 
     @Override
