@@ -57,7 +57,7 @@ public class Publication {
         return status;
     }
 
-    public String getlink() {
+    public String getLink() {
         return link;
     }
 

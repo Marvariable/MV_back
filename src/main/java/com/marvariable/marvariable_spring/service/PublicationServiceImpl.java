@@ -5,7 +5,6 @@ import com.marvariable.marvariable_spring.dto.response.VisualArtResponseDTO;
 import com.marvariable.marvariable_spring.entity.Publication;
 import com.marvariable.marvariable_spring.repository.PublicationRepository;
 
-import io.micrometer.common.lang.NonNull;
 
 import org.springframework.stereotype.Service;
 
@@ -40,7 +39,6 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
     @Override
-    @NonNull
     public Optional<Publication> getPublicationById(Long id) {
         return publicationRepository.findById(id);
     }
@@ -55,7 +53,7 @@ public class PublicationServiceImpl implements PublicationService {
         existingPublication.setPublicationDate(publication.getPublicationDate());
         existingPublication.setImageUrl(publication.getImageUrl());
         existingPublication.setCategory(publication.getCategory());
-        existingPublication.setLink(publication.getlink());
+        existingPublication.setLink(publication.getLink());
         existingPublication.setStatus(publication.getStatus());
 
         return publicationRepository.save(existingPublication);
