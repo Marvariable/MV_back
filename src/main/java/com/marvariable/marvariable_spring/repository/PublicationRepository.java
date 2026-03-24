@@ -14,4 +14,11 @@ public interface PublicationRepository extends JpaRepository<Publication, Long> 
     List<Publication> findByPublicationDate(LocalDate publicationDate);
 
     List<Publication> findByTitleContainingIgnoreCaseAndPublicationDate(String title, LocalDate publicationDate);
+
+    List<Publication> findBySectionIgnoreCase(String section);
+
+    List<Publication> findByShowInHomeTrue();
+
+    List<Publication> findBySectionIgnoreCaseAndStatus(String section, String status);
+
 }
