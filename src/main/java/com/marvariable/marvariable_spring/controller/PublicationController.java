@@ -67,4 +67,8 @@ public class PublicationController {
         publicationService.deletePublication(id);
         return ResponseEntity.noContent().build();
     }
+
+    
+
+
 }

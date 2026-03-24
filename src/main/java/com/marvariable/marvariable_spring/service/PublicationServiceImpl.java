@@ -5,7 +5,6 @@ import com.marvariable.marvariable_spring.dto.response.VisualArtResponseDTO;
 import com.marvariable.marvariable_spring.entity.Publication;
 import com.marvariable.marvariable_spring.repository.PublicationRepository;
 
-
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -55,6 +54,8 @@ public class PublicationServiceImpl implements PublicationService {
         existingPublication.setCategory(publication.getCategory());
         existingPublication.setLink(publication.getLink());
         existingPublication.setStatus(publication.getStatus());
+        existingPublication.setSection(publication.getSection());
+        existingPublication.setShowInHome(publication.getShowInHome());
 
         return publicationRepository.save(existingPublication);
     }
@@ -105,6 +106,20 @@ public class PublicationServiceImpl implements PublicationService {
                         publication.getImageUrl(),
                         publication.getPublicationDate(),
                         publication.getCategory()))
+                .toList();
+    }
+
+    @Override
+    public List<Publication> getPublicationsBySection(String section) {
+        return publicationRepository.findBySectionIgnoreCaseAndStatus(section, "PUBLISHED");
+    }
+
+    @Override
+    public List<Publication> getHomePublications() {
+        return publicationRepository.findByShowInHomeTrue()
+                .stream()
+                .filter(publication -> "PUBLISHED".equalsIgnoreCase(publication.getStatus()))
+                .limit(4)
                 .toList();
     }
 }
