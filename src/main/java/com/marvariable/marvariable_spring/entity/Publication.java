@@ -26,6 +26,10 @@ public class Publication {
 
     private String link;
 
+    private String section;
+
+    private Boolean showInHome;
+
     public Publication() {
     }
 
@@ -61,6 +65,13 @@ public class Publication {
         return link;
     }
 
+    public String getSection(){
+        return section;
+    }
+
+    public Boolean getShowInHome(){
+        return showInHome;
+    }
     public void setId(Long id) {
         this.id = id;
     }
@@ -91,5 +102,13 @@ public class Publication {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public void setSection(String section){
+        this.section=section;
+    }
+
+    public void setShowInHome (Boolean showInHome){
+        this.showInHome=showInHome;
     }
 }
