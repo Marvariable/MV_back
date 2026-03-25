@@ -5,7 +5,6 @@ import com.marvariable.marvariable_spring.dto.response.VisualArtResponseDTO;
 import com.marvariable.marvariable_spring.entity.Publication;
 import com.marvariable.marvariable_spring.service.PublicationService;
 
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,7 +67,14 @@ public class PublicationController {
         return ResponseEntity.noContent().build();
     }
 
-    
+    @GetMapping("/section/{section}")
+    public List<Publication> getPublicationsBySection(@PathVariable String section) {
+        return publicationService.getPublicationsBySection(section);
+    }
 
+    @GetMapping("/home-selected")
+    public List<Publication> getHomePublications() {
+        return publicationService.getHomePublications();
+    }
 
 }

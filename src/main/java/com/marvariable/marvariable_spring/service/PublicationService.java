@@ -28,9 +28,7 @@ public interface PublicationService {
 
     List<VisualArtResponseDTO> getVisualArts();
 
-    List<Publication> findBySectionIgnoreCase(String section);
+    List<Publication> getPublicationsBySection(String section);
 
-    List<Publication> findByShowInHomeTrue();
-
-    List<Publication> findBySectionIgnoreCaseAndStatus(String section, String status);
+    List<Publication> getHomePublications();
 }
